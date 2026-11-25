@@ -1,0 +1,75 @@
+// Write a program to swap the first and last digit of a number.
+#include <stdio.h>
+
+int main() {
+    long long num, n, swapped;
+    int isNegative = 0;
+
+    printf("Enter an integer: ");
+    scanf("%lld", &num);
+
+    if (num < 0) {
+        isNegative = 1;
+        n = -num;
+    } else {
+        n = num;
+    }
+
+    // Single-digit numbers stay the same
+    if (n < 10) {
+        printf("Number after swapping first and last digit = %lld\n", num);
+        return 0;
+    }
+
+    int lastDigit = n % 10;
+
+    // Find the first digit and its place value (power of 10)
+    long long powerOf10 = 1;
+    long long temp = n;
+    while (temp >= 10) {
+        temp /= 10;
+        powerOf10 *= 10;
+    }
+    int firstDigit = temp;
+
+    // Extract the middle digits and reassemble in swapped order
+    long long middlePart = (n % powerOf10) / 10;
+    swapped = (lastDigit * powerOf10) + (middlePart * 10) + firstDigit;
+
+    if (isNegative) {
+        swapped = -swapped;
+    }
+
+    printf("Number after swapping first and last digit = %lld\n", swapped);
+
+    return 0;
+}
+// Write a program to check if a number is a perfect number.
+#include <stdio.h>
+
+int main() {
+    int num, sum = 0;
+
+    printf("Enter a positive integer: ");
+    scanf("%d", &num);
+
+    if (num <= 1) {
+        printf("%d is not a perfect number.\n", num);
+        return 0;
+    }
+
+    for (int i = 1; i <= num / 2; i++) {
+        if (num % i == 0) {
+            sum += i;
+        }
+    }
+
+    if (sum == num) {
+        printf("%d is a perfect number.\n", num);
+    } else {
+        printf("%d is not a perfect number.\n", num);
+    }
+
+    return 0;
+}
+
