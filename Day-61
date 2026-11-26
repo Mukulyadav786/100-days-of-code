@@ -1,0 +1,57 @@
+// Write a program to take an integer array arr and an integer k as inputs. The task is to find the first negative integer in each subarray of size k moving from left to right. If no negative exists in a window, print "0" for that window. Print the results separated by spaces as output.
+#include <stdio.h>
+
+void printFirstNegativeInWindow(int arr[], int n, int k) {
+    int q[n]; // Queue to store indices of negative elements
+    int front = 0, rear = -1;
+
+    for (int i = 0; i < n; i++) {
+        // 1. Remove indices that have fallen out of the current window (i - k)
+        if (front <= rear && q[front] <= i - k) {
+            front++;
+        }
+
+        // 2. If the current element is negative, add its index to the queue
+        if (arr[i] < 0) {
+            q[++rear] = i;
+        }
+
+        // 3. Once the first window of size k is complete, print the result
+        if (i >= k - 1) {
+            int result = (front <= rear) ? arr[q[front]] : 0;
+
+            if (i < n - 1) {
+                printf("%d ", result);
+            } else {
+                printf("%d\n", result);
+            }
+        }
+    }
+}
+
+int main() {
+    int n, k;
+
+    printf("Enter number of elements: ");
+    if (scanf("%d", &n) != 1 || n <= 0) {
+        return 0;
+    }
+
+    int arr[n];
+    printf("Enter %d integers: ", n);
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    printf("Enter k: ");
+    scanf("%d", &k);
+
+    if (k <= 0 || k > n) {
+        printf("Invalid window size k.\n");
+        return 0;
+    }
+
+    printFirstNegativeInWindow(arr, n, k);
+
+    return 0;
+}
