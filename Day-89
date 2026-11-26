@@ -1,0 +1,25 @@
+// Show that enums store integers by printing assigned values.
+#include <stdio.h>
+
+enum Colors
+{
+    RED = 10,
+    GREEN = 20,
+    BLUE = 30
+};
+
+int main()
+{
+    enum Colors color;
+
+    color = RED;
+    printf("RED = %d\n", color);
+
+    color = GREEN;
+    printf("GREEN = %d\n", color);
+
+    color = BLUE;
+    printf("BLUE = %d\n", color);
+
+    return 0;
+}
