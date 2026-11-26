@@ -1,0 +1,49 @@
+// Write a program to take two strings s and t as inputs (assume all characters are lowercase). The task is to determine if s and t are valid anagrams, meaning they contain the same characters with the same frequencies. Print "Anagram" if they are, otherwise "Not Anagram".
+#include <stdio.h>
+#include <string.h>
+
+int isAnagram(const char *s, const char *t) {
+    // Strings of different lengths cannot be anagrams
+    if (strlen(s) != strlen(t)) {
+        return 0;
+    }
+
+    int freq[26] = {0};
+
+    // Increment count for characters in s and decrement for characters in t
+    for (int i = 0; s[i] != '\0'; i++) {
+        freq[s[i] - 'a']++;
+        freq[t[i] - 'a']--;
+    }
+
+    // Verify all character frequencies balance out to zero
+    for (int i = 0; i < 26; i++) {
+        if (freq[i] != 0) {
+            return 0;
+        }
+    }
+
+    return 1;
+}
+
+int main() {
+    char s[10005], t[10005];
+
+    printf("Enter string s: ");
+    if (scanf("%10004s", s) != 1) {
+        return 0;
+    }
+
+    printf("Enter string t: ");
+    if (scanf("%10004s", t) != 1) {
+        return 0;
+    }
+
+    if (isAnagram(s, t)) {
+        printf("Anagram\n");
+    } else {
+        printf("Not Anagram\n");
+    }
+
+    return 0;
+}
