@@ -1,0 +1,94 @@
+// Check if two strings are anagrams of each other.
+#include <stdio.h>
+
+int main() {
+    char str1[100], str2[100];
+    int freq[256] = {0}; // Tracks frequency for all ASCII characters
+    int len1 = 0, len2 = 0;
+
+    printf("Enter first string: ");
+    scanf(" %99[^\n]", str1);
+
+    printf("Enter second string: ");
+    scanf(" %99[^\n]", str2);
+
+    // Calculate lengths of both strings
+    while (str1[len1] != '\0') {
+        len1++;
+    }
+    while (str2[len2] != '\0') {
+        len2++;
+    }
+
+    // Anagrams must have the exact same length
+    if (len1 != len2) {
+        printf("The strings are NOT anagrams.\n");
+        return 0;
+    }
+
+    // Increment count for str1 and decrement count for str2
+    for (int i = 0; i < len1; i++) {
+        freq[(unsigned char)str1[i]]++;
+        freq[(unsigned char)str2[i]]--;
+    }
+
+    // Check if all character counts balanced out to zero
+    int is_anagram = 1;
+    for (int i = 0; i < 256; i++) {
+        if (freq[i] != 0) {
+            is_anagram = 0;
+            break;
+        }
+    }
+
+    if (is_anagram) {
+        printf("The strings are ANAGRAMS.\n");
+    } else {
+        printf("The strings are NOT anagrams.\n");
+    }
+
+    return 0;
+}
+// Find the longest word in a sentence.
+#include <stdio.h>
+
+int main() {
+    char str[200];
+    int i = 0;
+    int current_len = 0, max_len = 0;
+    int current_start = 0, max_start = 0;
+
+    printf("Enter a sentence: ");
+    scanf(" %199[^\n]", str);
+
+    while (1) {
+        // Check if current character is part of a word
+        if (str[i] != ' ' && str[i] != '\0') {
+            if (current_len == 0) {
+                current_start = i; // Mark the starting index of the word
+            }
+            current_len++;
+        } else {
+            // End of a word reached: update max if this word is longer
+            if (current_len > max_len) {
+                max_len = current_len;
+                max_start = current_start;
+            }
+            current_len = 0; // Reset counter for the next word
+        }
+
+        if (str[i] == '\0') {
+            break;
+        }
+        i++;
+    }
+
+    // Print the longest word using its starting index and length
+    printf("Longest word: ");
+    for (int j = 0; j < max_len; j++) {
+        printf("%c", str[max_start + j]);
+    }
+    printf("\nLength: %d\n", max_len);
+
+    return 0;
+}

@@ -1,0 +1,70 @@
+// Reverse a string.
+#include <stdio.h>
+
+int main() {
+    char str[100];
+    int length = 0;
+
+    printf("Enter a string: ");
+    fgets(str, sizeof(str), stdin);
+
+    // Find the length of the string excluding the newline character
+    while (str[length] != '\0' && str[length] != '\n') {
+        length++;
+    }
+    str[length] = '\0'; // Remove trailing newline if present
+
+    // Reverse the string in-place using two pointers
+    int start = 0;
+    int end = length - 1;
+    while (start < end) {
+        char temp = str[start];
+        str[start] = str[end];
+        str[end] = temp;
+
+        start++;
+        end--;
+    }
+
+    printf("Reversed string: %s\n", str);
+
+    return 0;
+}
+// Check if a string is a palindrome.
+#include <stdio.h>
+
+int main() {
+    char str[100];
+    int length = 0;
+
+    printf("Enter a string: ");
+    fgets(str, sizeof(str), stdin);
+
+    // Find length excluding trailing newline
+    while (str[length] != '\0' && str[length] != '\n') {
+        length++;
+    }
+    str[length] = '\0';
+
+    // Compare characters from both ends moving inward
+    int start = 0;
+    int end = length - 1;
+    int is_palindrome = 1;
+
+    while (start < end) {
+        if (str[start] != str[end]) {
+            is_palindrome = 0;
+            break;
+        }
+        start++;
+        end--;
+    }
+
+    if (is_palindrome) {
+        printf("\"%s\" is a PALINDROME.\n", str);
+    } else {
+        printf("\"%s\" is NOT a palindrome.\n", str);
+    }
+
+    return 0;
+}

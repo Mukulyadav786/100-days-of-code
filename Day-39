@@ -1,0 +1,75 @@
+// Check if the elements on the diagonal of a matrix are distinct.
+#include <stdio.h>
+
+int main() {
+    int rows, cols;
+
+    printf("Enter the number of rows: ");
+    scanf("%d", &rows);
+
+    printf("Enter the number of columns: ");
+    scanf("%d", &cols);
+
+    int matrix[rows][cols];
+
+    // Read elements into the matrix
+    printf("Enter elements of the %dx%d matrix:\n", rows, cols);
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            scanf("%d", &matrix[i][j]);
+        }
+    }
+
+    // Number of main diagonal elements is the smaller of rows and cols
+    int diag_len = (rows < cols) ? rows : cols;
+    int is_distinct = 1;
+
+    // Compare every pair of main diagonal elements
+    for (int i = 0; i < diag_len; i++) {
+        for (int j = i + 1; j < diag_len; j++) {
+            if (matrix[i][i] == matrix[j][j]) {
+                is_distinct = 0;
+                break;
+            }
+        }
+        if (!is_distinct) {
+            break;
+        }
+    }
+
+    if (is_distinct) {
+        printf("All main diagonal elements are DISTINCT.\n");
+    } else {
+        printf("Main diagonal elements are NOT distinct (duplicates found).\n");
+    }
+
+    return 0;
+}
+// Find the sum of main diagonal elements for a square matrix.
+#include <stdio.h>
+
+int main() {
+    int n, sum = 0;
+
+    printf("Enter the size of the square matrix (n): ");
+    scanf("%d", &n);
+
+    int matrix[n][n];
+
+    // Read elements into the square matrix
+    printf("Enter elements of the %dx%d matrix:\n", n, n);
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            scanf("%d", &matrix[i][j]);
+        }
+    }
+
+    // Calculate the sum of main diagonal elements
+    for (int i = 0; i < n; i++) {
+        sum += matrix[i][i];
+    }
+
+    printf("Sum of main diagonal elements: %d\n", sum);
+
+    return 0;
+}

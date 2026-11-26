@@ -1,0 +1,93 @@
+// Print the initials of a name.
+#include <stdio.h>
+
+int main() {
+    char name[100];
+
+    printf("Enter full name: ");
+    scanf(" %99[^\n]", name);
+
+    printf("Initials: ");
+
+    // Print the first character if it is not a space
+    if (name[0] != '\0' && name[0] != ' ') {
+        char ch = name[0];
+        if (ch >= 'a' && ch <= 'z') {
+            ch = ch - 32; // Convert to uppercase
+        }
+        printf("%c. ", ch);
+    }
+
+    // Print every non-space character that immediately follows a space
+    for (int i = 1; name[i] != '\0'; i++) {
+        if (name[i] != ' ' && name[i - 1] == ' ') {
+            char ch = name[i];
+            if (ch >= 'a' && ch <= 'z') {
+                ch = ch - 32; // Convert to uppercase
+            }
+            printf("%c. ", ch);
+        }
+    }
+
+    printf("\n");
+    return 0;
+}
+// Print initials of a name with the surname displayed in full.
+#include <stdio.h>
+
+int main() {
+    char name;
+    int len = 0;
+    int last_space = -1;
+
+    printf("Enter full name: ");
+    scanf(" %99[^\n]", name);
+
+    // Find total length and trim any trailing spaces
+    while (name[len] != '\0') {
+        len++;
+    }
+    while (len > 0 && name[len - 1] == ' ') {
+        name[--len] = '\0';
+    }
+
+    // Locate the last space separating the surname
+    for (int i = 0; i < len; i++) {
+        if (name[i] == ' ') {
+            last_space = i;
+        }
+    }
+
+    printf("Formatted name: ");
+
+    // Print initials for all words before the surname
+    if (last_space != -1) {
+        if (name != ' ') {
+            char ch = name;
+            if (ch >= 'a' && ch <= 'z') {
+                ch -= 32;
+            }
+            printf("%c. ", ch);
+        }
+
+        for (int i = 1; i < last_space; i++) {
+            if (name[i] != ' ' && name[i - 1] == ' ') {
+                char ch = name[i];
+                if (ch >= 'a' && ch <= 'z') {
+                    ch -= 32;
+                }
+                printf("%c. ", ch);
+            }
+        }
+    }
+
+    // Print the surname in full with its first letter capitalized
+    int surname_start = last_space + 1;
+    if (name[surname_start] >= 'a' && name[surname_start] <= 'z') {
+        name[surname_start] -= 32;
+    }
+    printf("%s\n", &name[surname_start]);
+
+    return 0;
+}
+

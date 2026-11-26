@@ -1,0 +1,80 @@
+// Find the sum of each row of a matrix and store it in an array.
+#include <stdio.h>
+
+int main() {
+    int rows, cols;
+
+    printf("Enter the number of rows: ");
+    scanf("%d", &rows);
+
+    printf("Enter the number of columns: ");
+    scanf("%d", &cols);
+
+    int matrix[rows][cols];
+    int row_sum[rows]; // 1D array to store the sum of each row
+
+    // Read elements into the matrix
+    printf("Enter elements of the %dx%d matrix:\n", rows, cols);
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            scanf("%d", &matrix[i][j]);
+        }
+    }
+
+    // Calculate the sum of each row and store it in row_sum[]
+    for (int i = 0; i < rows; i++) {
+        row_sum[i] = 0; // Initialize sum for row i
+        for (int j = 0; j < cols; j++) {
+            row_sum[i] += matrix[i][j];
+        }
+    }
+
+    // Print the stored row sums
+    printf("Sum of each row:\n");
+    for (int i = 0; i < rows; i++) {
+        printf("Row %d sum = %d\n", i + 1, row_sum[i]);
+    }
+
+    return 0;
+}
+// Find the transpose of a matrix.
+#include <stdio.h>
+
+int main() {
+    int rows, cols;
+
+    printf("Enter the number of rows: ");
+    scanf("%d", &rows);
+
+    printf("Enter the number of columns: ");
+    scanf("%d", &cols);
+
+    int matrix[rows][cols];
+    int transpose[cols][rows]; // Swapped dimensions for the transpose
+
+    // Read elements into the original matrix
+    printf("Enter elements of the %dx%d matrix:\n", rows, cols);
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            scanf("%d", &matrix[i][j]);
+        }
+    }
+
+    // Compute the transpose
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            transpose[j][i] = matrix[i][j];
+        }
+    }
+
+    // Print the transposed matrix (cols x rows)
+    printf("Transpose of the matrix:\n");
+    for (int i = 0; i < cols; i++) {
+        for (int j = 0; j < rows; j++) {
+            printf("%d\t", transpose[i][j]);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}

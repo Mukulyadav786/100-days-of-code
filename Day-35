@@ -1,0 +1,101 @@
+// Find the second largest element in an array.
+#include <stdio.h>
+#include <limits.h>
+
+int main() {
+    int n;
+
+    printf("Enter the number of elements: ");
+    scanf("%d", &n);
+
+    if (n < 2) {
+        printf("Array must contain at least 2 elements.\n");
+        return 1;
+    }
+
+    int arr[n];
+
+    // Read elements into the array
+    printf("Enter %d elements:\n", n);
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    int largest = INT_MIN;
+    int second_largest = INT_MIN;
+
+    // Find the largest and second largest elements in one pass
+    for (int i = 0; i < n; i++) {
+        if (arr[i] > largest) {
+            second_largest = largest;
+            largest = arr[i];
+        } else if (arr[i] > second_largest && arr[i] != largest) {
+            second_largest = arr[i];
+        }
+    }
+
+    if (second_largest == INT_MIN) {
+        printf("No second largest element exists (all elements may be equal).\n");
+    } else {
+        printf("Second largest element: %d\n", second_largest);
+    }
+
+    return 0;
+}
+// Rotate an array to the right by k positions.
+#include <stdio.h>
+
+// Helper function to reverse a portion of the array
+void reverse(int arr[], int start, int end) {
+    while (start < end) {
+        int temp = arr[start];
+        arr[start] = arr[end];
+        arr[end] = temp;
+        start++;
+        end--;
+    }
+}
+
+int main() {
+    int n, k;
+
+    printf("Enter the number of elements: ");
+    scanf("%d", &n);
+
+    if (n <= 0) {
+        printf("Array size must be greater than 0.\n");
+        return 1;
+    }
+
+    int arr[n];
+
+    // Read elements into the array
+    printf("Enter %d elements:\n", n);
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    printf("Enter the number of positions to rotate right (k): ");
+    scanf("%d", &k);
+
+    // Handle cases where k >= n or k is negative
+    k = k % n;
+    if (k < 0) {
+        k += n;
+    }
+
+    // Three-step reversal algorithm
+    reverse(arr, 0, n - 1);     // Step 1: Reverse the entire array
+    reverse(arr, 0, k - 1);     // Step 2: Reverse the first k elements
+    reverse(arr, k, n - 1);     // Step 3: Reverse the remaining n - k elements
+
+    // Print the rotated array
+    printf("Array after rotating right by %d positions:\n", k);
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+
+    printf("\n");
+    return 0;
+}
+

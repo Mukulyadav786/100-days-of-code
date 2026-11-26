@@ -1,0 +1,91 @@
+// Merge two arrays.
+#include <stdio.h>
+
+int main() {
+    int n1, n2;
+
+    // Read first array
+    printf("Enter the number of elements in the first array: ");
+    scanf("%d", &n1);
+    int arr1[n1];
+
+    printf("Enter %d elements for the first array:\n", n1);
+    for (int i = 0; i < n1; i++) {
+        scanf("%d", &arr1[i]);
+    }
+
+    // Read second array
+    printf("Enter the number of elements in the second array: ");
+    scanf("%d", &n2);
+    int arr2[n2];
+
+    printf("Enter %d elements for the second array:\n", n2);
+    for (int i = 0; i < n2; i++) {
+        scanf("%d", &arr2[i]);
+    }
+
+    // Create merged array of combined size
+    int merged[n1 + n2];
+
+    // Copy elements from first array
+    for (int i = 0; i < n1; i++) {
+        merged[i] = arr1[i];
+    }
+
+    // Copy elements from second array
+    for (int i = 0; i < n2; i++) {
+        merged[n1 + i] = arr2[i];
+    }
+
+    // Print the merged array
+    printf("Merged array:\n");
+    for (int i = 0; i < n1 + n2; i++) {
+        printf("%d ", merged[i]);
+    }
+
+    printf("\n");
+    return 0;
+}
+// Find the digit that occurs the most times in an integer number.
+#include <stdio.h>
+
+int main() {
+    long long num;
+    int freq[10] = {0}; // Indices 0 to 9 represent digits 0-9
+
+    printf("Enter an integer: ");
+    scanf("%lld", &num);
+
+    // Handle 0 as a special case
+    if (num == 0) {
+        freq[0] = 1;
+    } else {
+        // Convert negative number to positive
+        if (num < 0) {
+            num = -num;
+        }
+
+        // Count occurrences of each digit (0-9)
+        while (num > 0) {
+            int digit = num % 10;
+            freq[digit]++;
+            num /= 10;
+        }
+    }
+
+    // Find the digit (0-9) with the maximum frequency
+    int max_freq = 0;
+    int most_frequent_digit = 0;
+
+    for (int i = 0; i <= 9; i++) {
+        if (freq[i] > max_freq) {
+            max_freq = freq[i];
+            most_frequent_digit = i;
+        }
+    }
+
+    printf("Most frequent digit: %d (occurs %d times)\n", most_frequent_digit, max_freq);
+
+    return 0;
+}
+

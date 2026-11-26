@@ -1,0 +1,96 @@
+// Perform diagonal traversal of a matrix.
+#include <stdio.h>
+
+int main() {
+    int rows, cols;
+
+    printf("Enter the number of rows: ");
+    scanf("%d", &rows);
+
+    printf("Enter the number of columns: ");
+    scanf("%d", &cols);
+
+    int matrix[rows][cols];
+
+    // Read elements into the matrix
+    printf("Enter elements of the %dx%d matrix:\n", rows, cols);
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            scanf("%d", &matrix[i][j]);
+        }
+    }
+
+    // Perform diagonal traversal
+    // Each diagonal has a constant index sum (d = i + j) from 0 to rows + cols - 2
+    printf("Diagonal traversal of the matrix:\n");
+    for (int d = 0; d <= rows + cols - 2; d++) {
+        // Determine starting and ending row indices for diagonal d
+        int start_row = (d < cols) ? 0 : d - cols + 1;
+        int end_row = (d < rows) ? d : rows - 1;
+
+        for (int i = start_row; i <= end_row; i++) {
+            int j = d - i;
+            printf("%d ", matrix[i][j]);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
+// Multiply two matrices.
+#include <stdio.h>
+
+int main() {
+    int r1, c1, r2, c2;
+
+    printf("Enter rows and columns for the first matrix: ");
+    scanf("%d %d", &r1, &c1);
+
+    printf("Enter rows and columns for the second matrix: ");
+    scanf("%d %d", &r2, &c2);
+
+    // Check if multiplication is possible
+    if (c1 != r2) {
+        printf("Matrix multiplication is not possible! Columns of first matrix (%d) must equal rows of second matrix (%d).\n", c1, r2);
+        return 1;
+    }
+
+    int mat1[r1][c1], mat2[r2][c2], result[r1][c2];
+
+    // Read elements of the first matrix
+    printf("Enter elements of the first %dx%d matrix:\n", r1, c1);
+    for (int i = 0; i < r1; i++) {
+        for (int j = 0; j < c1; j++) {
+            scanf("%d", &mat1[i][j]);
+        }
+    }
+
+    // Read elements of the second matrix
+    printf("Enter elements of the second %dx%d matrix:\n", r2, c2);
+    for (int i = 0; i < r2; i++) {
+        for (int j = 0; j < c2; j++) {
+            scanf("%d", &mat2[i][j]);
+        }
+    }
+
+    // Multiply mat1 and mat2
+    for (int i = 0; i < r1; i++) {
+        for (int j = 0; j < c2; j++) {
+            result[i][j] = 0; // Initialize cell before accumulating products
+            for (int k = 0; k < c1; k++) {
+                result[i][j] += mat1[i][k] * mat2[k][j];
+            }
+        }
+    }
+
+    // Print the resultant matrix (r1 x c2)
+    printf("Product of the two matrices:\n");
+    for (int i = 0; i < r1; i++) {
+        for (int j = 0; j < c2; j++) {
+            printf("%d\t", result[i][j]);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
