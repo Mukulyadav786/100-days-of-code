@@ -1,0 +1,41 @@
+// Write a program to take an integer array as input. Only one element will be repeated. Print the repeated element. Try to find the result in one single iteration.
+#include <stdio.h>
+
+int findRepeatedElement(int arr[], int n) {
+    // Track numbers from 0 to n - 1
+    int seen[n];
+    for (int i = 0; i < n; i++) {
+        seen[i] = 0;
+    }
+
+    // Single pass through the array
+    for (int i = 0; i < n; i++) {
+        if (seen[arr[i]] == 1) {
+            return arr[i]; // Repeated element found immediately
+        }
+        seen[arr[i]] = 1;
+    }
+
+    return -1;
+}
+
+int main() {
+    int n;
+
+    printf("Enter size of array n: ");
+    if (scanf("%d", &n) != 1 || n <= 1) {
+        return 0;
+    }
+
+    int arr[n];
+    printf("Enter %d integers (values between 1 and %d): ", n, n - 1);
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    int repeated = findRepeatedElement(arr, n);
+    printf("%d\n", repeated);
+
+    return 0;
+}
+
