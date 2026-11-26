@@ -1,0 +1,46 @@
+// Change the date format from dd/04/yyyy to dd-Apr-yyyy.
+#include <stdio.h>
+int main() {
+
+    int day, month, year;
+
+    const char *months[] = {
+        "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+    };
+
+    printf("Enter date (dd/mm/yyyy): ");
+    if (scanf("%d/%d/%d", &day, &month, &year) == 3) {
+        if (month >= 1 && month <= 12) {
+            printf("Formatted Date: %02d-%s-%04d\n", day, months[month - 1], year);
+        } else {
+            printf("Invalid month.\n");
+        }
+    }
+
+    return 0;
+}
+// Print all sub-strings of a string.
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char str[100], sub[100];
+    
+    printf("Enter a string: ");
+    scanf("%99s", str);
+    
+    int n = strlen(str);
+
+    for (int i = 0; i < n; i++) {
+        for (int len = 1; len <= n - i; len++) {
+            // Copy 'len' characters starting at index 'i'
+            strncpy(sub, str + i, len);
+            sub[len] = '\0'; // Add null terminator
+            printf("%s\n", sub);
+        }
+    }
+
+    return 0;
+}
+
