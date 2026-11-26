@@ -1,0 +1,36 @@
+// Write a program to take a string input. Change it to sentence case.
+#include <stdio.h>
+#include <ctype.h>
+
+void toSentenceCase(char *str) {
+    int capitalizeNext = 1; // Capitalize the very first letter encountered
+
+    for (int i = 0; str[i] != '\0'; i++) {
+        unsigned char ch = (unsigned char)str[i];
+
+        if (isalpha(ch)) {
+            if (capitalizeNext) {
+                str[i] = (char)toupper(ch);
+                capitalizeNext = 0;
+            } else {
+                str[i] = (char)tolower(ch);
+            }
+        } else if (ch == '.' || ch == '!' || ch == '?') {
+            capitalizeNext = 1; // Capitalize the next letter after sentence punctuation
+        }
+    }
+}
+
+int main() {
+    char str[1005];
+
+    printf("Enter a string: ");
+    if (fgets(str, sizeof(str), stdin) == NULL) {
+        return 0;
+    }
+
+    toSentenceCase(str);
+    printf("%s", str);
+
+    return 0;
+}
