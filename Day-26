@@ -1,0 +1,74 @@
+/* Write a program to print the following pattern:
+    5
+   45
+  345
+ 2345
+12345
+*/
+#include <stdio.h>
+
+int main() {
+    int rows = 5;
+
+    for (int i = rows; i >= 1; i--) {
+        // Print leading spaces
+        for (int s = 1; s < i; s++) {
+            printf(" ");
+        }
+        // Print numbers from i to 5
+        for (int j = i; j <= rows; j++) {
+            printf("%d", j);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
+/* Write a program to print the following pattern:
+
+*
+
+*
+*
+*
+
+*
+*
+*
+*
+*
+
+*
+*
+*
+
+*
+*/
+#include <stdio.h>
+
+int main() {
+    int n = 3; // Number of blocks in the upper half
+
+    // Upper half (1, 3, 5 stars)
+    for (int i = 1; i <= n; i++) {
+        int stars = 2 * i - 1;
+        for (int j = 1; j <= stars; j++) {
+            printf("*\n");
+        }
+        printf("\n"); // Blank line between blocks
+    }
+
+    // Lower half (3, 1 stars)
+    for (int i = n - 1; i >= 1; i--) {
+        int stars = 2 * i - 1;
+        for (int j = 1; j <= stars; j++) {
+            printf("*\n");
+        }
+        if (i > 1) {
+            printf("\n"); // Blank line between blocks except after the last one
+        }
+    }
+
+    return 0;
+}
+
