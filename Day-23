@@ -33,15 +33,16 @@ int main() {
 int main() {
     int rows = 5, cols = 5;
 
-    // Outer loop for each row
+    // Outer loop controls the number of rows
     for (int i = 1; i <= rows; i++) {
-        // Inner loop for each column
+        // Inner loop prints 5 stars in each row
         for (int j = 1; j <= cols; j++) {
             printf("*");
         }
-        // Move to the next line after printing each row
+        // Move to the next line after each row
         printf("\n");
     }
 
     return 0;
 }
+
