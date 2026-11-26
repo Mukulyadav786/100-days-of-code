@@ -1,0 +1,43 @@
+// Write a program to take an integer array arr and an integer k as inputs. The task is to find the kth smallest element in the array. Print the kth smallest element as output.
+#include <stdio.h>
+#include <stdlib.h>
+
+// Comparator function for ascending order
+int compare(const void *a, const void *b) {
+    int intA = *(const int *)a;
+    int intB = *(const int *)b;
+    return (intA > intB) - (intA < intB);
+}
+
+int findKthSmallest(int arr[], int n, int k) {
+    qsort(arr, n, sizeof(int), compare);
+    return arr[k - 1];
+}
+
+int main() {
+    int n, k;
+
+    printf("Enter number of elements: ");
+    if (scanf("%d", &n) != 1 || n <= 0) {
+        return 0;
+    }
+
+    int arr[n];
+    printf("Enter %d integers: ", n);
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    printf("Enter k: ");
+    scanf("%d", &k);
+
+    if (k < 1 || k > n) {
+        printf("Invalid value of k.\n");
+        return 0;
+    }
+
+    int result = findKthSmallest(arr, n, k);
+    printf("%d\n", result);
+
+    return 0;
+}
