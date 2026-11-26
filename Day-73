@@ -1,0 +1,52 @@
+// Read a text file and count the total number of characters, words, and lines. A word is defined as a sequence of non-space characters separated by spaces or newlines.
+#include <stdio.h>
+#include <ctype.h>
+
+int main() {
+    FILE *fp;
+    char filename[100];
+    int ch;
+    long characters = 0, words = 0, lines = 0;
+    int inWord = 0;
+
+    printf("Enter filename: ");
+    if (scanf("%99s", filename) != 1) {
+        return 1;
+    }
+
+    fp = fopen(filename, "r");
+    if (fp == NULL) {
+        printf("Error: Could not open %s.\n", filename);
+        return 1;
+    }
+
+    while ((ch = fgetc(fp)) != EOF) {
+        characters++;
+
+        if (ch == '\n') {
+            lines++;
+        }
+
+        // Check for whitespace (spaces, tabs, newlines)
+        if (isspace((unsigned char)ch)) {
+            inWord = 0;
+        } else if (!inWord) {
+            inWord = 1;
+            words++;
+        }
+    }
+
+    // If the file is non-empty and does not end with a newline, count the final line
+    if (characters > 0 && ch != '\n') {
+        // Check last read character before EOF
+    }
+
+    fclose(fp);
+
+    printf("Characters: %ld\n", characters);
+    printf("Words: %ld\n", words);
+    printf("Lines: %ld\n", lines);
+
+    return 0;
+}
+
