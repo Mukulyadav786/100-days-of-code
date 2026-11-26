@@ -1,0 +1,46 @@
+// Write a program to take a string s as input. The task is to find the length of the longest substring without repeating characters. Print the length as output.
+#include <stdio.h>
+#include <string.h>
+
+int lengthOfLongestSubstring(const char *s) {
+    int lastIndex[256];
+    for (int i = 0; i < 256; i++) {
+        lastIndex[i] = -1;
+    }
+
+    int maxLen = 0;
+    int start = 0; // Left boundary of the current window
+
+    for (int end = 0; s[end] != '\0'; end++) {
+        unsigned char ch = (unsigned char)s[end];
+
+        // If ch was seen inside the current window, jump start past its last position
+        if (lastIndex[ch] >= start) {
+            start = lastIndex[ch] + 1;
+        }
+
+        lastIndex[ch] = end;
+
+        int currentLen = end - start + 1;
+        if (currentLen > maxLen) {
+            maxLen = currentLen;
+        }
+    }
+
+    return maxLen;
+}
+
+int main() {
+    char s[10005];
+
+    printf("Enter string s: ");
+    if (scanf("%10004s", s) != 1) {
+        printf("0\n");
+        return 0;
+    }
+
+    int result = lengthOfLongestSubstring(s);
+    printf("%d\n", result);
+
+    return 0;
+}
